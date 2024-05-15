@@ -5,9 +5,12 @@ import { FaCircle } from "react-icons/fa";
 
 export default function DataGridCharacters({
   characters,
+  currentPage
 }: {
-  characters: Character[];
-}) {
+  characters: Character[],
+  currentPage: number;
+
+}, ) {
   return characters.length == 0 ? (
     <Loading />
   ) : (
@@ -18,7 +21,7 @@ export default function DataGridCharacters({
           className="rounded-sm bg-cover bg-center"
           style={{
             backgroundImage: `url('https://starwars-visualguide.com/assets/img/characters/${
-              index + 1
+              (index + 1 )* currentPage
             }.jpg')`,
           }}
           key={index}
