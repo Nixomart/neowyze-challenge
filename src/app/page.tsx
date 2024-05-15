@@ -20,7 +20,7 @@ export default function Home() {
   return isFetched == false  ?  (
     <Loading />
   ) : (
-    <main className="h-auto bg-black">
+    <main className="h-auto bg-black text-white">
       <DataGridFilms films={data} />
     </main>
   );

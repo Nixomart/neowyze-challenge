@@ -6,5 +6,6 @@ type Character = {
     height: Number,
     skin_color: string,
     mass: string,
-    url: string
+    url: string,
+    gender: string
 }
