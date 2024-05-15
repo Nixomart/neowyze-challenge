@@ -11,7 +11,7 @@ export default function DataGridFilms({
   return films.length == 0 ? (
     <Loading />
   ) : (
-    <section className="grid grid-cols-3 my-10 gap-3 h-screen">
+    <section className="grid grid-cols-3 py-10 bg-black gap-3 h-screen">
       {films.map((film: Film, index) => (
         <div
           className="rounded-sm bg-cover bg-center"

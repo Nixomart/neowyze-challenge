@@ -16,7 +16,7 @@ export default function Page() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const searchParams = useSearchParams();
 
-  const { data, isFetched, refetch, isRefetching } = useCharacter(
+  const { data, isFetched, refetch, isRefetching,  } = useCharacter(
     null,
     currentPage
   );
@@ -27,16 +27,25 @@ export default function Page() {
   const [currentGenderToFilter, setCurrentGenderToFilter] = useState<
     null | string
   >(null);
+
   useEffect(() => {
-    const page = searchParams.get("page");
-    const gender = searchParams.get("gender");
-    const eyesColor = searchParams.get("eyes_color");
-    
-    if (page != null) {
-      setCurrentPage(+page)
+    if (isFetched) {
+     /*  const page = searchParams.get("page")
+      const pageNumber = page ? +page : 1; // Si page es null, establece el número de página en 1
+
+      console.log("PAGE: ", pageNumber);
+      console.log("Is page null?: ", page === null);
+      
+      if (page !== null) {
+        setCurrentPage(pageNumber)  
+        refetch()
+      } */
+      setDataGridCharacters(data.results)
     }
-  }, []);
+  }, [isFetched]);
   useEffect(() => {
+    console.log("IS REFETECHING", isRefetching);
+    
     if (isFetched) {
       if (currentEyesToFilter != "") {
         setDataGridCharacters(
@@ -64,7 +73,7 @@ export default function Page() {
 
   return isFetched == false && isRefetching == false ? (
     <Loading />
-  ) : (
+  ) : !data.hasOwnProperty("results") ? <p>No hay datos</p>:  (
     <>
       <section className="py-10 bg-black text-white">
         <Filter

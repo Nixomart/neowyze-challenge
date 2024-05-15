@@ -5,7 +5,10 @@ export async function getCharacters(page: number | undefined | null) {
     console.log("PAGINA EM GETCHARACTER: ", page);
     
     const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
+
     const data = await response.json();
+    console.log("DATA: ", data);
+    
     return  data;
   } catch (error) {
     console.error("Error fetching characters:", error);

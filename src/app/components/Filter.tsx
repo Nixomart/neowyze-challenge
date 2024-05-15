@@ -47,49 +47,49 @@ export const Filter: React.FC<Props> = ({
         <p className="text-center">Filtrar por color de ojos</p>
         <div className="space-x-5">
           {eyesArray.map((ele, index) => (
-            <Link
+           /*  <Link
               key={index}
               href={{
                 pathname: "/characters",
                 query: { eyes_color: ele.name },
               }}
-            >
-              <button onClick={() => handleFilterByEyesColor(ele.name)}>
+            > */
+              <button key={index} onClick={() => handleFilterByEyesColor(ele.name)}>
                 {ele.element}
               </button>
-            </Link>
+           /*  </Link> */
           ))}
         </div>
       </div>
       <div className="mx-auto space-y-5">
         <p className="text-center ">Filtrar por genero</p>
         <div className="space-x-5  text-yellow-200">
-          <Link
+         {/*  <Link
             href={{
               pathname: "/characters",
               query: { gender: "male" },
             }}
-          >
+          > */}
             <button
               className=" py-2 px-3 border-2  rounded-xl border-yellow-200"
               onClick={() => handleFilterByGender("male")}
             >
               Masculino
             </button>
-          </Link>
+        {/*   </Link>
           <Link
             href={{
               pathname: "/characters",
               query: { gender: "female" },
             }}
-          >
+          > */}
             <button
               className=" py-2 px-3 border-2  rounded-xl border-yellow-200"
               onClick={() => handleFilterByGender("female")}
             >
               Femenino
             </button>
-          </Link>
+          {/* </Link> */}
         </div>
       </div>
     </div>

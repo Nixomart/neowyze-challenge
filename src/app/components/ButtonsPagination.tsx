@@ -13,7 +13,6 @@ export const ButtonsPagination: React.FC<Props> = ({
   setCurrentPage,
   refetch,
 }) => {
-
   const handlePreviousPage = () => {
     const newPage = currentPage + 1;
     setCurrentPage(newPage);
@@ -24,14 +23,28 @@ export const ButtonsPagination: React.FC<Props> = ({
   };
   return (
     <div className=" flex">
-       <Link href={{ pathname: '/characters', query: { page: currentPage - 1 } }}>
+      {/* 
+      
+      <Link
+        href={{ pathname: "/characters", query: { page: currentPage - 1 } }}
+      >
         <button onClick={handlePreviousPage}>Previous</button>
       </Link>
+      */}
 
-      {/* Link para la página siguiente */}
-      <Link href={{ pathname: '/characters', query: { page: currentPage + 1 } }}>
-        <button onClick={handleNextPage}>Next</button>
-      </Link>
+      {data.previous !== null && (
+        <button onClick={handlePreviousPage}>Previous</button>
+      )}
+
+      {/* 
+      {data.next !== null && (
+        <Link
+          href={{ pathname: "/characters", query: { page: currentPage + 1 } }}
+        >
+          <button onClick={handleNextPage}>Next</button>
+        </Link>
+      )} */}
+      {data.next !== null && <button onClick={handleNextPage}>Next</button>}
     </div>
   );
 };
