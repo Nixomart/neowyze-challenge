@@ -26,14 +26,14 @@ export default function Page({params}:any) {
         />
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <h2 className="text-xl font-semibold">{dataFilm.name}</h2>
-            <p><strong>Eye color:</strong> {dataFilm.eye_color}</p>
-            <p><strong>Birth year:</strong> {dataFilm.birth_year}</p>
+            <h2 className="text-xl font-semibold">{dataFilm.name == "n/a"  || dataFilm.name == "unknown" ? "":  dataFilm.name}</h2>
+            <p><strong>Eye color:</strong> {dataFilm.eye_color == "n/a"  || dataFilm.eye_color == "unknown" ? "":  dataFilm.eye_color}</p>
+            <p><strong>Birth year:</strong> {dataFilm.birth_year == "n/a"  || dataFilm.birth_year == "unknown" ? "":  dataFilm.birth_year}</p>
           </div>
           <div>
-            <p><strong>Hair color:</strong> {dataFilm.hair_color}</p>
-            <p><strong>Skin color:</strong> {dataFilm.skin_color}</p>
-            <p><strong>Mass:</strong> {dataFilm.mass}</p>
+            <p><strong>Hair color:</strong> {dataFilm.hair_color == "n/a"  || dataFilm.hair_color == "unknown" ? "":  dataFilm.hair_color}</p>
+            <p><strong>Skin color:</strong> {dataFilm.skin_color == "n/a"  || dataFilm.skin_color == "unknown" ? "":  dataFilm.skin_color}</p>
+            <p><strong>Mass:</strong> {dataFilm.mass == "n/a"  || dataFilm.mass == "unknown" ? "":  dataFilm.mass}</p>
           </div>
         </div>
       </div>

@@ -18,7 +18,7 @@ export default function DataGridCharacters({
       
       {characters.map((character: Character, index) => (
         <div
-          className="rounded-sm bg-cover bg-center"
+          className="rounded-sm bg-cover flex flex-col bg-center"
           style={{
             backgroundImage: `url('https://starwars-visualguide.com/assets/img/characters/${
               (index + 1 )* currentPage
@@ -26,18 +26,27 @@ export default function DataGridCharacters({
           }}
           key={index}
         >
-          <p>{character.name}</p>
+          {
+            character.name == "unknown" &&
+          <p className="xl:text-4xl xl:text-center bg-slate-400">{character.name}</p>
+          }
+          <div className="mt-auto">
+
           <Link
             href={{
               pathname: `/characters/${index + 1}`,
               query: { search: character.url },
             }}
             key={index}
-            className="text-gray-700"
+            className="text-gray-700 "
           >
-            <p>Ver mas</p>
+            <p className="bg-gray-500 text-white xl:text-4xl">Ver mas</p>
           </Link>
+          </div>
+          {
+            character.birth_year !== "unknown" &&
           <p>{character.birth_year}</p>
+          }
         </div>
       ))}
     </section>

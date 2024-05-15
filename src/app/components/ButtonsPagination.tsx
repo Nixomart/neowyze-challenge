@@ -22,7 +22,7 @@ export const ButtonsPagination: React.FC<Props> = ({
     refetch();
   };
   return (
-    <div className=" flex">
+    <div className=" flex mx-10">
       {/* 
       
       <Link
@@ -33,7 +33,7 @@ export const ButtonsPagination: React.FC<Props> = ({
       */}
 
       {data.previous !== null && (
-        <button onClick={handlePreviousPage}>Previous</button>
+        <button className="text-4xl border-2 border-yellow-200 px-3 py-2 rounded-2xl" onClick={handlePreviousPage}>Previous</button>
       )}
 
       {/* 
@@ -44,7 +44,7 @@ export const ButtonsPagination: React.FC<Props> = ({
           <button onClick={handleNextPage}>Next</button>
         </Link>
       )} */}
-      {data.next !== null && <button onClick={handleNextPage}>Next</button>}
+      {data.next !== null && <button className="ml-auto text-4xl border-2 border-yellow-200 px-3 py-2 rounded-2xl" onClick={handleNextPage}>Next</button>}
     </div>
   );
 };
