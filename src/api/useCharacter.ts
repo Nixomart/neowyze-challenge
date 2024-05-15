@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 
 export async function getCharacters(page: number | undefined | null) {
   try {
+    console.log("PAGINA EM GETCHARACTER: ", page);
+    
     const response = await fetch(`https://swapi.dev/api/people/?page=${page}`);
     const data = await response.json();
     return  data;

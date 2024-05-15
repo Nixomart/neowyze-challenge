@@ -3,16 +3,19 @@ import { useCharacter } from "@/api/useCharacter";
 import React, { useEffect, useState } from "react";
 import Loading from "../components/Loading";
 import DataGridCharacters from "./components/DataGridCharacters";
-import { FaCircle } from "react-icons/fa";
-const eyesArray = [
-  { name: "blue", element: <FaCircle className="text-blue-500 text-4xl"  /> },
-  { name: "yellow", element: <FaCircle className="text-yellow-500 text-4xl " /> },
-  { name: "red", element: <FaCircle className="text-red-500 text-4xl"  /> },
-  { name: "brown", element: <FaCircle className="text-amber-900 text-4xl"  /> },
-  { name: "blue-gray", element: <FaCircle className="text-gray-500 text-4xl " /> },
-];
+import {
+  FaArrowAltCircleLeft,
+  FaArrowAltCircleRight,
+  FaCircle,
+} from "react-icons/fa";
+import { Filter } from "../components/Filter";
+import { ButtonsPagination } from "../components/ButtonsPagination";
+import { useSearchParams } from "next/navigation";
+
 export default function Page() {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const searchParams = useSearchParams();
+
   const { data, isFetched, refetch, isRefetching } = useCharacter(
     null,
     currentPage
@@ -24,22 +27,15 @@ export default function Page() {
   const [currentGenderToFilter, setCurrentGenderToFilter] = useState<
     null | string
   >(null);
-
-  const handleFilterByEyesColor = (colorEye: string) => {
-    setCurrentEyesToFilter(colorEye);
-    setCurrentGenderToFilter(null);
-    refetch();
-    setCurrentPage(1);
-  };
-  const handleFilterByGender = (colorEye: string) => {
-    setCurrentGenderToFilter(colorEye);
-    refetch();
-    setCurrentEyesToFilter("");
-    setCurrentPage(1);
-  };
   useEffect(() => {
-    console.log("refeching");
-  }, [isRefetching]);
+    const page = searchParams.get("page");
+    const gender = searchParams.get("gender");
+    const eyesColor = searchParams.get("eyes_color");
+    
+    if (page != null) {
+      setCurrentPage(+page)
+    }
+  }, []);
   useEffect(() => {
     if (isFetched) {
       if (currentEyesToFilter != "") {
@@ -59,73 +55,35 @@ export default function Page() {
       }
     }
   }, [isRefetching]);
-  useEffect(() => {
+  /*   useEffect(() => {
     if (isFetched) {
       console.log("PAGINA ACTUAL: ", currentPage);
       console.log("prevois: ", data.previous);
     }
-  }, [currentPage]);
-  const handlePreviousPage = () => {
-    setCurrentPage(currentPage - 1);
-    refetch();
-  };
-  const handleNextPage = () => {
-    setCurrentPage(currentPage + 1);
-    refetch();
-  };
+  }, [currentPage]); */
 
   return isFetched == false && isRefetching == false ? (
     <Loading />
   ) : (
     <>
       <section className="py-10 bg-black text-white">
-        <div className="flex flex-col space-y-5">
-          <div className="mx-auto space-y-5">
-            <p className="text-center">Filtrar por color de ojos</p>
-            <div className="space-x-5">
-              {eyesArray.map((ele, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleFilterByEyesColor(ele.name)}
-                >
-                  {ele.element}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="mx-auto space-y-5">
-            <p className="text-center ">Filtrar por genero</p>
-            <div className="space-x-5  text-yellow-200">
-              <button
-                className=" py-2 px-3 border-2  rounded-xl border-yellow-200"
-                onClick={() => handleFilterByGender("male")}
-              >
-                Masculino
-              </button>
-              <button 
-              className=" py-2 px-3 border-2  rounded-xl border-yellow-200"
-              onClick={() => handleFilterByGender("female")}>
-                Femenino
-              </button>
-            </div>
-          </div>
-        </div>
+        <Filter
+          setCurrentEyesToFilter={setCurrentEyesToFilter}
+          setCurrentGenderToFilter={setCurrentGenderToFilter}
+          setCurrentPage={setCurrentPage}
+          refetch={refetch}
+        />
 
         <DataGridCharacters
           currentPage={currentPage}
           characters={dataGridCharacters}
         />
-        <div className="bg-green-500">
-          <button
-            disabled={data.previous === null || currentPage == 1}
-            onClick={handlePreviousPage}
-          >
-            Pagina anterior
-          </button>
-          <button disabled={data.next === null} onClick={handleNextPage}>
-            Siguiente pagina
-          </button>
-        </div>
+        <ButtonsPagination
+          data={data}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          refetch={refetch}
+        />
       </section>
     </>
   );
