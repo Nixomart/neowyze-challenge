@@ -75,7 +75,7 @@ export default function Page() {
     <Loading />
   ) : !data.hasOwnProperty("results") ? <p>No hay datos</p>:  (
     <>
-      <section className="py-10 bg-black text-white">
+      <section className="py-20 bg-black text-white">
         <Filter
           setCurrentEyesToFilter={setCurrentEyesToFilter}
           setCurrentGenderToFilter={setCurrentGenderToFilter}

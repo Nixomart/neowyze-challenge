@@ -18,12 +18,14 @@ export default function Header() {
   return (
     <header className="fixed top-0 w-full z-50 bg-black">
       {showMenu && <Menu setShowMenu={setShowMenu} />}
-      <nav className="flex">
+      <nav className="flex p-5">
+        <Link href={"/"}>
         <img
           className="w-20"
           src="https://1000marcas.net/wp-content/uploads/2019/12/logo-StarWars.png"
           alt=""
-        />
+          />
+          </Link>
         <button onClick={handleOpenMenu} className="ml-auto text-white">
           <IoReorderThreeOutline className="text-3xl" />
         </button>

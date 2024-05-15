@@ -8,11 +8,13 @@ export async function getFilms() {
   const dataMap = data.results.map((film: Film) => ({
     ...film,
   }));
+console.log("dataaaa: ", data.results);
 
   return data.results;
 }
 export async function getFilm(id: string) {
   try {
+    
     const response = await fetch(id);
     const data = await response.json();
     // Mapear las URLs de los personajes a promesas de solicitudes de red y esperar todas las solicitudes usando Promise.all()
@@ -22,9 +24,10 @@ export async function getFilm(id: string) {
         return characterResponse.json();
       }
     );
-
+    
     // Esperar todas las promesas de personajes y mapear los resultados a los datos de personajes
     const charactersData = await Promise.all(characterPromises);
+    console.log("entra a ca ", charactersData);
 
     // Construir la película con los datos de personajes mapeados
     const film: Film = {
